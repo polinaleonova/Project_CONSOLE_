@@ -1,0 +1,10 @@
+.my_selector{
+    background-color: green;
+}
+.hide{
+    display: none;
+}
+p{
+    font-size: 28px;
+    line-height: 6px;
+}

@@ -1,0 +1,11 @@
+[{"fields": {"destination": "SGPL",
+             "hops_besteffort": 0,
+             "hops_low": 0,
+             "hops_standard": 0,
+             "latency_besteffort": 9999,
+             "latency_low": 6,
+             "latency_standard": 7,
+             "source": "SGCN"},
+  "model": "main.penlatency",
+  "pk": 1}
+]
