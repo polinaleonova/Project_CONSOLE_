@@ -9,7 +9,9 @@ from django.views.generic import TemplateView
 
 urlpatterns = patterns(
     '',
-
+    url(r'^any_number/$',
+        'main.views.any_number',
+        name='any_number'),
 )
 
 
