@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="{% static 'css/console_style.css' %}" rel="stylesheet">
-    <script src="{% static 'js/bootstrap.js' %}"></script>
+{#    <script src="{% static 'js/bootstrap.js' %}"></script>#}
     <script src="{% static 'js/lib/jquery-1.11.3.js' %}"></script>
     <script src="{% static 'js/console_js.js' %}"></script>
     <script src="{% static 'js/lib/typed.js' %}"></script>
@@ -14,16 +14,18 @@
 </head>
 
 <body>
-<div id="move_up"></div>
+<div id="move_up"><span class="indicator">&#8607</span></div>
         <div class="console">
-            <div  id="area_view">
-                <span class="initial"></span>
-{#                <span id='cursor'></span>#}
-            </div>
-            <div class="area_active">
-                <input type="text" placeholder="Enter any command" id='active_area' class="working_area" >
+            <div id="work_space">
+                <div  id="area_view">
+                </div>
+                <div id="area_active">
+                    <span class="initial_path"></span>
+                    <input type="text"  id="command_line" >
+{#                    <span id='cursor'></span>#}
+                </div>
             </div>
         </div>
-<div id="move_down"></div>
+<div id="move_down"><span class="indicator">&#8609</span></div>
 </body>
 </html>

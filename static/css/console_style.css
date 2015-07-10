@@ -2,14 +2,18 @@ html{
     height: 100%;
 }
 body{
+    background-size: cover;
+    background-image: url('/static/img/DSC1493.jpg');
     margin: 0;
     padding: 0;
-    background: honeydew;
+    /*background: honeydew;*/
     height: 100%;
     overflow-x: hidden;
 }
 
 .console {
+    opacity: 0.8;
+    font-size: 14pt;
     display: block;
     position: absolute;
     width: 600px;
@@ -18,85 +22,89 @@ body{
     right: 0;
     left: 0;
     bottom: 0;
-    background : fixed, #0F2106;
+    background : fixed, #304B54;
     height: 400px;
     border: #0F2106 solid 3px;
     border-radius: 20px;
-    color: #292B29;
+    color: #F2EBD3;
     box-shadow: 0 0 40px #131911;
     outline: none;
 }
-.working_area{
+#command_line{
+    position: relative;
+    float: left;
     word-break: break-all;
     outline: none;
-    width: 580px;
+    border:none;
     resize: none;
-    overflow: auto;
-    font-size: 14pt;
-    appearance: none;
-    margin-left: -3px;
+    font-size: inherit;
     height: 20px;
-    text-align: left;
-    padding: 10px;
-    border: #0F2106 solid 3px;
-    border-radius: 20px;
-    color: #80AC50;
-    background-color: #0F2106;
+    color: inherit;
+    background-color: #304B54;
 }
-.working_area:active{
-    cursor: wait;
+.active{
+     cursor: auto;
+
 }
 
-/*@keyframes blink {*/
- /*0% { opacity: 1; }*/
- /*50% { opacity: 0; }*/
- /*99% { opacity: 1; }*/
-/*}*/
+@keyframes blink {
+ 0% { color: #466157; }
+ 50% { color: #668C7E; }
+ 99% { color: #ACEAD2; }
+}
 
-/*.blinki{*/
-    /*z-index: 5;*/
-    /*color: #292B29;*/
-    /*animation: blink 0.7s step-start infinite;*/
-/*}*/
+.blink{
+    animation: blink 0.7s step-start infinite;
+}
 
+#work_space{
+    margin: 20px;
+    height: 360px;
+    overflow-y: hidden;
+}
 #area_view{
     overflow-y: auto;
     top: 0;
-    margin: 20px;
-    color: #80AC50;
+    color: inherit;
     word-break: break-all;
     position: relative;
-    height: 320px;
 }
+
 #area_active{
     overflow-y: auto;
     top: 0;
-    margin: 20px;
-    color: #80AC50;
+    color: inherit;
     word-break: break-all;
     position: relative;
     height: 40px;
-    background-color: #0F2106;
+    background-color: #304B54;
+}
+
+.initial_path{
+    font-size: inherit;
+    height: 20px;
+    color: inherit;
+    position: relative;
+    float: left;
 }
 
 
 span{
     display: block;
     position: relative;
-    font-size: 14pt;
+    font-size: inherit;
 }
-/*#area_view>span::before{*/
-    /*content : 'polina@polina-comp:~';*/
-/*}*/
+.indicator{
+    /*color: #304B54;*/
+    margin: auto;
+    position: relative;
+    left: 3px;
+    top:-1px;
+    font-size: 30px;
 
-/*#area_view>span.out_error::before{*/
-    /*content : '';*/
-/*}*/
-/*#area_view>span.in::before{*/
-    /*content : '';*/
-/*}*/
-
+}
 #move_up{
+        opacity: 0.8;
     z-index: 5;
     position: absolute;
     width: 30px;
@@ -105,15 +113,17 @@ span{
     right: 0;
     left: 0;
     bottom: 400px;
-    background : honeydew;
+    background : #F2EBD3;
     height: 30px;
     border: #0F2106 solid 3px;
     border-radius: 30px;
-    color: chartreuse;
+    /*color: chartreuse;*/
     box-shadow: 0 0 40px #131911;
+
 }
 
 #move_down{
+        opacity: 0.8;
     z-index: 5;
     position: absolute;
     width: 30px;
@@ -122,21 +132,14 @@ span{
     right: 0;
     left: 0;
     bottom: 0;
-    background : honeydew;
+    background : #F2EBD3;
     height: 30px;
     border: #0F2106 solid 3px;
     border-radius: 30px;
-    color: chartreuse;
+    /*color:#0f0f0f;*/
     box-shadow: 0 0 40px #131911;
 }
-/*#move_up:hover{*/
-    /*background-color: firebrick;*/
+
+/*.ready_to_act>.indicator{*/
+    /*color: #ffff00 !important;*/
 /*}*/
-
-.ready_to_act{
-    background: greenyellow !important;
-}
-
-.glyphicon-triangle-top{
-    color: #0F2106;
-}
