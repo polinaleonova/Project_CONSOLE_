@@ -127,6 +127,7 @@
         // pass current string state to each function, types 1 char per call
         ,
         typewrite: function(curString, curStrPos) {
+            this.options.currentStringTyped();
             // exit when stopped
             if (this.stop === true) {
                 return;
@@ -166,7 +167,7 @@
 
                 if (self.contentType === 'html') {
                     // skip over html tags while typing
-                    var curChar = curString.substr(curStrPos).charAt(0)
+                    var curChar = curString.substr(curStrPos).charAt(0);
                     if (curChar === '<' || curChar === '&') {
                         var tag = '';
                         var endTag = '';
@@ -327,7 +328,8 @@
          * @param {Array} array
          * @returns {Array}
          */
-        ,shuffleArray: function(array) {
+        ,
+        shuffleArray: function(array) {
             var tmp, current, top = array.length;
             if(top) while(--top) {
                 current = Math.floor(Math.random() * (top + 1));
@@ -338,23 +340,6 @@
             return array;
         }
 
-        // Start & Stop currently not working
-
-        // , stop: function() {
-        //     var self = this;
-
-        //     self.stop = true;
-        //     clearInterval(self.timeout);
-        // }
-
-        // , start: function() {
-        //     var self = this;
-        //     if(self.stop === false)
-        //        return;
-
-        //     this.stop = false;
-        //     this.init();
-        // }
 
         // Reset and rebuild the element
         ,
@@ -362,7 +347,7 @@
             var self = this;
             clearInterval(self.timeout);
             var id = this.el.attr('id');
-            this.el.after('<span id="' + id + '"/>')
+            this.el.after('<span id="' + id + '"/>');
             this.el.remove();
             if (typeof this.cursor !== 'undefined') {
                 this.cursor.remove();
@@ -414,7 +399,8 @@
         //callback for every typed string
         onStringTyped: function() {},
         // callback for reset
-        resetCallback: function() {}
+        resetCallback: function() {},
+        currentStringTyped: function() {}
     };
 
 

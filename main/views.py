@@ -21,4 +21,4 @@ def list_view(request, *args, **kwargs):
     """
     List of all views by url
     """
-    return render(request, 'console.html', {})
+    return render(request, 'console1.html', {})

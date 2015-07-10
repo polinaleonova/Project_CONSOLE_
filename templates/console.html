@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="{% static 'css/console_style.css' %}" rel="stylesheet">
+    <script src="{% static 'js/bootstrap.js' %}"></script>
     <script src="{% static 'js/lib/jquery-1.11.3.js' %}"></script>
     <script src="{% static 'js/console_js.js' %}"></script>
     <script src="{% static 'js/lib/typed.js' %}"></script>
@@ -15,15 +16,13 @@
 <body>
 <div id="move_up"></div>
         <div class="console">
-{#            <div class="tittle">Tittle</div>#}
-{#            <div class="bottom_tittle">Bottom Tittle</div>#}
-            <div  id="o">
-                <div class="d">
-                <textarea  resize='none' row="1" wrap='off' placeholder="Enter any command" id='active_area' class="working_area" ></textarea>
-                </div>
+            <div  id="area_view">
+                <span class="initial"></span>
 {#                <span id='cursor'></span>#}
             </div>
-{#            <input type="text" id='active_area' class="working_area">#}
+            <div class="area_active">
+                <input type="text" placeholder="Enter any command" id='active_area' class="working_area" >
+            </div>
         </div>
 <div id="move_down"></div>
 </body>
