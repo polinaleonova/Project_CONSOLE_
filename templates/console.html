@@ -5,27 +5,30 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="{% static 'css/console_style.css' %}" rel="stylesheet">
-{#    <script src="{% static 'js/bootstrap.js' %}"></script>#}
     <script src="{% static 'js/lib/jquery-1.11.3.js' %}"></script>
     <script src="{% static 'js/console_js.js' %}"></script>
     <script src="{% static 'js/lib/typed.js' %}"></script>
+    <script src="{% static 'js/lib/underscore.js' %}"></script>
     <title></title>
 
 </head>
 
 <body>
-<div id="move_up"><span class="indicator">&#8607</span></div>
+
+<div id="move_up"></div>
         <div class="console">
             <div id="work_space">
                 <div  id="area_view">
+                    <script id="console_string_templ" type="text/template">
+                       <span><%= console_string %></span>
+                    </script>
                 </div>
                 <div id="area_active">
                     <span class="initial_path"></span>
                     <input type="text"  id="command_line" >
-{#                    <span id='cursor'></span>#}
                 </div>
             </div>
         </div>
-<div id="move_down"><span class="indicator">&#8609</span></div>
+<div id="move_down"></div>
 </body>
 </html>
