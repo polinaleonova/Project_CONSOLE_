@@ -1,78 +1,93 @@
-
 import json
 import logging
 import random
 
+import handler
+from django.template import Context
 
 from django.http import HttpResponse
 from django.shortcuts import render
 
 
 def anynumber(request):
-    results = {}
-    results['parametr'] = '=>'+'1234567890'*8
-    j = json.dumps(results)
-    return HttpResponse(j, content_type ='application/json')
+    data = handler.anynumber_handler()
+    return HttpResponse(data, content_type='application/json')
 
 
 def find_sum_digits_factorial(request, num_factorial):
-    """
-    factorial function without using recursion
-    and calculation of sum the result's digits
-    """
-    results = {}
-    value = 1
-    for x in xrange(2, num_factorial+1):
-        value *= x
-    factorial = value
-    string_factorial = str(factorial)
-    sum = 0
-    for digit in string_factorial:
-        sum += int(digit)
-    results['parametr'] = '=>'+'Sum of the digits in the number {}! is equal {}'.format(num_factorial, sum)
-    j = json.dumps(results)
-    return HttpResponse(j, mimetype='application/json')
-
+    data = handler.find_sum_digits_factorial_handler(int(num_factorial))
+    return HttpResponse(data, mimetype='application/json')
 
 
 def find_max_palindrome(request, count_digits):
-    results = {}
-    count_digits_int = int(count_digits)
-    max_value = int('9'*count_digits_int)
-    min_value = int('1'+'0'*(count_digits_int-1))
-    max_number = str(max_value**2)
-    first_part = max_number[0:len(max_number)/2]
-    for number in xrange(int(first_part), min_value, -1):
-        str_number = str(number)
-        palindrome = int(str_number + str_number[::-1])
-        for div in xrange(max_value, min_value, -1):
-            if palindrome % div == 0 and min_value < palindrome/div < max_value:
-                results['parametr'] = '=>'+str(palindrome)
-                j = json.dumps(results)
-                return HttpResponse(j, mimetype='application/json')
+    if not count_digits:
+        return HttpResponse(
+            json.dumps(
+                {'parameter': "You didn't pass any arrguments. Sorry. :{"}
+            ), mimetype='application/json'
+        )
+    try:
+        int(count_digits)
+    except ValueError:
+        pass
+    data = handler.find_max_palindrome_handler(count_digits)
+    return HttpResponse(data, mimetype='application/json')
+
 
 def sum(request, *args, **kwargs):
+    data = handler.sum_handler(*args, **kwargs)
+    return HttpResponse(data, mimetype='application/json')
 
-    results = {}
-    unicode_arg_string = kwargs['optional']
-    arg_string_type = unicode_arg_string.encode('utf-8')
-    list_all_elements_str = arg_string_type.split('/')
-    sum_arguments = 0
-    for elem in range(len(list_all_elements_str)):
-        sum_arguments += int(list_all_elements_str[elem])
-    results['parametr'] = '=>'+str(sum_arguments)
-    j = json.dumps(results)
-    return HttpResponse(j, mimetype='application/json')
 
-def help(request):
-    results = {}
-    results['parametr'] = '=>'+'1234567890'*8
-    j = json.dumps(results)
-    return HttpResponse(j, mimetype='application/json')
+def bracket(request, number_bracket):
+    data = handler.bracket_handler(number_bracket)
+    return HttpResponse(data, mimetype='application/json')
+
+
+def help_command(request, *args, **kwargs):
+        data = handler.help_command_handler(*args, **kwargs)
+        return HttpResponse(data, mimetype='application/json')
+
+# from django.template
+# def list_view(request, *args, **kwargs):
+
+
+# **second method for getting list_of_possible_command
+# def list_commands(request):
+#     data = json.dumps({'commands': ['anynumber', 'help', '', 'sum', 'find_max_palindrome', 'find_sum_digits_factorial']})
+#     return HttpResponse(data, mimetype='application/json')
 
 
 def list_view(request, *args, **kwargs):
     """
     List of all views by url
     """
-    return render(request, 'console.html', {})
+    return render(request, 'console.html', {'commands': json.dumps(['anynumber', 'help', '', 'sum', 'find_max_palindrome', 'bracket', 'find_sum_digits_factorial'])})
+    # return render(request, 'console.html', {}) #**second method for getting list_of_possible_command
+
+
+
+
+
+
+
+
+# It is equivalent to
+# from django.template import RequestContext, loader
+#
+# def list_view(request, *args, **kwargs):
+#     """
+#     List of all views by url
+#     """
+#     template = loader.get_template('console.html')
+#
+#     context_dictionary = RequestContext(request,{})
+#     pipirka = template.render(context_dictionary)
+#     # browser will get pipirka
+#     return HttpResponse(pipirka)
+
+
+# Project_CONSOLE_
+# It is the first project for implementation of the skills Python, Django, JavaScript, HTML and CSS.
+# This web-console must work like a unix-system console.
+# The execution of any command assume the calling of the view-function.

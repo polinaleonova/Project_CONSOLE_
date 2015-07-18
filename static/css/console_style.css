@@ -13,7 +13,6 @@ body{
 
 .console {
     opacity: 0.8;
-    font-size: 14pt;
     display: block;
     position: absolute;
     width: 600px;
@@ -37,7 +36,9 @@ body{
     outline: none;
     border:none;
     resize: none;
-    font-size: inherit;
+    font-size: 16px !important;
+    top: -2px;
+    font-family: Arial;
     height: 20px;
     color: inherit;
     background-color: #304B54;
@@ -81,7 +82,6 @@ body{
 }
 
 .initial_path{
-    font-size: inherit;
     height: 20px;
     color: inherit;
     position: relative;
@@ -92,19 +92,17 @@ body{
 span{
     display: block;
     position: relative;
-    font-size: inherit;
+    font-size: 16px !important;
+    font-family: Arial;
 }
-
-#move_up{
+.move_up_down{
     opacity: 0.8;
     z-index: 5;
     position: absolute;
     width: 30px;
     margin: auto;
-    top: 0;
     right: 0;
     left: 0;
-    bottom: 400px;
     background : #F2EBD3;
     height: 30px;
     border: #0F2106 solid 3px;
@@ -113,28 +111,14 @@ span{
     font-size: 30px;
     display: flex;
     justify-content: space-around;
-    color: rgb(149, 160, 152);
-
+    color: rgb(0, 119, 5)
 }
-
+#move_up{
+    top: 0;
+    bottom: 400px;
+}
 #move_down{
-        opacity: 0.8;
-    z-index: 5;
-    position: absolute;
-    width: 30px;
-    margin: auto;
     top: 400px;
-    right: 0;
-    left: 0;
     bottom: 0;
-    background : #F2EBD3;
-    height: 30px;
-    border: #0F2106 solid 3px;
-    border-radius: 30px;
-    box-shadow: 0 0 40px #131911;
-    font-size: 30px;
-    display: flex;
-    justify-content: space-around;
-    color: rgb(149, 160, 152);
 }
 

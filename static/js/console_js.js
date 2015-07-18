@@ -1,9 +1,12 @@
 $(document).ready(function() {
     var handler_area_writing,
-        list_of_possible_command,
         list_sequence_command,
         command_string,
         area_view,
+        strings_from_server,
+        index_current_string,
+        context,
+        request,
         tim,
         template,
         work_space = $("#work_space"),
@@ -13,18 +16,22 @@ $(document).ready(function() {
         speed_scroll = 1,
         func_name,func_arguments,
         current_dir = 'polina@polina-comp:~$',
-//        all_commands = {'help': function help(){return('help')}, 'a': function a() {}, 'anynumber': function anynumber(){return('any_number')}},
         active_area;
-        list_of_possible_command = ['anynumber','help', '', 'sum','find_max_palindrome', 'find_sum_digits_factorial'];
         command_string ='';
         template = $('#console_string_templ').html();
-//        func_name = list_sequence_command[0];
-//        func_arguments = list_sequence_command.slice(1);
+
+//    **second method for getting list_of_possible_command
+//    in this case list_of_possible_command - is not a global variable:
+
+//    $.get('http://localhost:8000/list_commands/').done(
+//        function(data){
+//         list_of_possible_command = data.commands
+//        }
+//    );
 
     active_area = $("#command_line");
     area_view = $("#area_view");
     $('.initial_path').html(current_dir);
-//    list_sequence_command = command_string.split(' ');
 
 //  Handling of event wheel to scrolling inner elements of the console
     function addOnWheel(elem, handler) {
@@ -47,26 +54,19 @@ $(document).ready(function() {
     });
 
 
-//    Handling of event wheel to scrolling inner elements of the console
-//    work_space.on('wheel',function(wheel_event){
-//        var delta = wheel_event.deltaY || wheel_event.detail || wheel_event.wheelDelta;
-//        if (delta>0){
-//        work_space.scrollTop() = work_space.scrollTop() + 50;}
-//        else{
-//            work_space.scrollTop() = work_space.scrollTop() - 50;
-//        }
-//    });
-
-
 //    Handling of event mouseover to scrolling inner elements of the console by putting the button up and down
     move_down.on('mouseover' ,function() {
+
        tim = setInterval(function () {
+           activation_scrolling();
            work_space.scrollTop(work_space.scrollTop() + 1);
        }, speed_scroll);
     });
     move_down.on('mouseout', function(){clearInterval(tim)});
     move_up.on('mouseover' ,function() {
+
        tim = setInterval(function () {
+           activation_scrolling();
            work_space.scrollTop(work_space.scrollTop() - 1);
        }, speed_scroll);
     });
@@ -79,21 +79,18 @@ $(document).ready(function() {
             work_space_scrollTop = work_space.scrollTop();
         if (work_space_scrollHeight > work_space_clientHeight
             && work_space_scrollTop == 0) {
-//            console.log(1);
               move_down.html('&#8609');
              move_up.html('');
             return
         }
         if  (work_space_scrollHeight == work_space_clientHeight
             && work_space_scrollTop == 0 ){
-//            console.log(4);
             move_down.html('');
             move_up.html('');
             return
         }
         if(work_space_scrollHeight - work_space_clientHeight > work_space_scrollTop
             && work_space_scrollHeight != 0 ){
-//            console.log(3);
             move_up.html('&#8607');
               move_down.html('&#8609');
             return
@@ -101,7 +98,6 @@ $(document).ready(function() {
         }
         if (work_space_scrollHeight > work_space_clientHeight
             && work_space_scrollHeight - work_space_clientHeight == work_space_scrollTop) {
-//            console.log(2);
             move_up.html('&#8607');
               move_down.html('');
         }
@@ -109,7 +105,7 @@ $(document).ready(function() {
 
 
 //    Activation of the input string by the mouseclick on any place in the page
-     $("#work_space, body").on("click", function(){
+     $("#work_space, body").on("keypress", function(){
          $('#command_line').focus();
      });
 
@@ -117,20 +113,35 @@ $(document).ready(function() {
         if (e.keyCode == 13) {
             activation_scrolling();
             command_string = $('#command_line').val();
-            var context = current_dir + command_string;
-            var request = {
+            context = current_dir + command_string;
+            request = {
                 url: "",
                 success: function (data) {
                     area_view.append(_.template(template)({console_string : context}));
                     area_view.append('<span></span>');
                     $('#area_view span:last').addClass('in');
-                    $("span[class='in']").typed({
-                        strings: [data.parametr],
-                        typeSpeed: -1000,
-                        currentStringTyped: function () {
-                            work_space.scrollTop(work_space[0].scrollHeight);
-                        }
-                    });
+
+                    strings_from_server = data.parameter.split('\n');
+                    index_current_string = 0;
+                    function str_print(){
+                        $("span[class='in']").typed({
+                            strings: [strings_from_server[index_current_string]],
+                            typeSpeed: -1000,
+                            shuffle: false,
+                            currentStringTyped: function () {
+                                work_space.scrollTop(work_space[0].scrollHeight);
+                            },
+                            onStringTyped: function() {
+                                index_current_string++;
+                                if(index_current_string !== strings_from_server.length){
+                                    area_view.append('<span></span>');
+                                    $('#area_view span:last').addClass('in');
+                                    str_print();
+                                }
+                            }
+                        });
+                    }
+                    str_print();
                     active_area.val('');
                 }
             };
@@ -141,7 +152,6 @@ $(document).ready(function() {
                 func_arguments = list_sequence_command.slice(1);
                 if (command_string == '') {
                     area_view.append(_.template(template)({console_string : context}));
-
                     active_area.val('');
                     return
                 }
@@ -153,24 +163,24 @@ $(document).ready(function() {
                 if (list_of_possible_command.indexOf(command_string) == -1 && list_sequence_command.length == 1) {
                     area_view.append(_.template(template)({console_string : context}));
                     area_view.append(_.template(template)({console_string : String(command_string) + ':' + 'This is non-existent command'}));
-//
                     active_area.val('');
                     return
                 }
+
 //                this block for work with few commands in one string. example
-              if  (list_sequence_command.length > 1 && list_of_possible_command.indexOf(func_name)!=1 ){
-                  var args = '';
-                  for ( var arg = 1; arg<list_sequence_command.length;arg++) {
-                      if (arg !=' '){
-                      args += list_sequence_command[arg]+'/';
+//                 $sum 3 4 2
+//                 =>9
+                  if  (list_sequence_command.length > 1 && list_of_possible_command.indexOf(func_name)!= -1 ){
+                      var args = '';
+                      for ( var arg = 1; arg<list_sequence_command.length;arg++) {
+                          if (arg !=' '){
+                            args += list_sequence_command[arg]+'/';
+                          }
+                      }
+                      request.url = 'http://localhost:8000/' + func_name + '/'+args.slice(0, -1);
+//                      request.success = function(data){console.log(data)};
+                        $.ajax(request);
                   }
-                  }
-
-                  request.url = 'http://localhost:8000/' + func_name + '/'+args;
-                  alert(request.url);
-                    $.ajax(request);
-              }
-
             }
             command_manager(command_string);
             work_space.scrollTop(work_space[0].scrollHeight);

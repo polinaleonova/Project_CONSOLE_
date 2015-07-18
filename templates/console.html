@@ -9,18 +9,25 @@
     <script src="{% static 'js/console_js.js' %}"></script>
     <script src="{% static 'js/lib/typed.js' %}"></script>
     <script src="{% static 'js/lib/underscore.js' %}"></script>
+
+    {% autoescape off %}
+        <script type="text/javascript">
+            var list_of_possible_command = JSON.parse('{{ commands }}');
+            {# or without autoescape/endautoescape  --> {{ commands|escapejs }} #}
+        </script>
+    {% endautoescape %}
+
     <title></title>
 
 </head>
 
 <body>
-
-<div id="move_up"></div>
+<div id="move_up" class="move_up_down"></div>
         <div class="console">
             <div id="work_space">
                 <div  id="area_view">
                     <script id="console_string_templ" type="text/template">
-                       <span><%= console_string %></span>
+                       <span> <%= console_string %> </span>
                     </script>
                 </div>
                 <div id="area_active">
@@ -29,6 +36,7 @@
                 </div>
             </div>
         </div>
-<div id="move_down"></div>
+<div id="move_down" class="move_up_down"></div>
 </body>
+
 </html>

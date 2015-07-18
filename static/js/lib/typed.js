@@ -110,6 +110,7 @@
                 if(self.shuffle) self.sequence = self.shuffleArray(self.sequence);
 
                 // Start typing
+
                 self.typewrite(self.strings[self.sequence[self.arrayPos]], self.strPos);
             }, self.startDelay);
         }
@@ -127,6 +128,7 @@
         // pass current string state to each function, types 1 char per call
         ,
         typewrite: function(curString, curStrPos) {
+            // custom callback
             this.options.currentStringTyped();
             // exit when stopped
             if (this.stop === true) {
@@ -315,8 +317,9 @@
                         if(self.shuffle) self.sequence = self.shuffleArray(self.sequence);
 
                         self.init();
-                    } else
+                    } else {
                         self.typewrite(self.strings[self.sequence[self.arrayPos]], curStrPos);
+                    }
                 }
 
                 // humanized value for typing
@@ -400,7 +403,8 @@
         onStringTyped: function() {},
         // callback for reset
         resetCallback: function() {},
-        currentStringTyped: function() {}
+        currentStringTyped: function() {},
+        no_backspace: false
     };
 
 
