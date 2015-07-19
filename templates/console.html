@@ -12,7 +12,7 @@
 
     {% autoescape off %}
         <script type="text/javascript">
-            var list_of_possible_command = JSON.parse('{{ commands }}');
+{#            var list_of_possible_command = JSON.parse('{{ commands }}');#}
             {# or without autoescape/endautoescape  --> {{ commands|escapejs }} #}
         </script>
     {% endautoescape %}

@@ -20,15 +20,6 @@ $(document).ready(function() {
         command_string ='';
         template = $('#console_string_templ').html();
 
-//    **second method for getting list_of_possible_command
-//    in this case list_of_possible_command - is not a global variable:
-
-//    $.get('http://localhost:8000/list_commands/').done(
-//        function(data){
-//         list_of_possible_command = data.commands
-//        }
-//    );
-
     active_area = $("#command_line");
     area_view = $("#area_view");
     $('.initial_path').html(current_dir);
@@ -120,67 +111,22 @@ $(document).ready(function() {
                     area_view.append(_.template(template)({console_string : context}));
                     area_view.append('<span></span>');
                     $('#area_view span:last').addClass('in');
-
-                    strings_from_server = data.parameter.split('\n');
-                    index_current_string = 0;
-                    function str_print(){
                         $("span[class='in']").typed({
-                            strings: [strings_from_server[index_current_string]],
+                            strings:[data.parameter],
                             typeSpeed: -1000,
                             shuffle: false,
                             currentStringTyped: function () {
                                 work_space.scrollTop(work_space[0].scrollHeight);
-                            },
-                            onStringTyped: function() {
-                                index_current_string++;
-                                if(index_current_string !== strings_from_server.length){
-                                    area_view.append('<span></span>');
-                                    $('#area_view span:last').addClass('in');
-                                    str_print();
-                                }
                             }
                         });
-                    }
-                    str_print();
                     active_area.val('');
                 }
             };
 
             function command_manager(command_string) {
-                list_sequence_command = command_string.trim().split(' ');
-                func_name = list_sequence_command[0];
-                func_arguments = list_sequence_command.slice(1);
-                if (command_string == '') {
-                    area_view.append(_.template(template)({console_string : context}));
-                    active_area.val('');
-                    return
-                }
-                if (list_of_possible_command.indexOf(command_string) != -1) {
-                    request.url = 'http://localhost:8000/' + command_string + '/';
+                sequence_command = command_string.replace(/ +/g, '/').trim();
+                request.url = 'http://localhost:8000/commands/' + sequence_command ;
                     $.ajax(request);
-                    return
-                }
-                if (list_of_possible_command.indexOf(command_string) == -1 && list_sequence_command.length == 1) {
-                    area_view.append(_.template(template)({console_string : context}));
-                    area_view.append(_.template(template)({console_string : String(command_string) + ':' + 'This is non-existent command'}));
-                    active_area.val('');
-                    return
-                }
-
-//                this block for work with few commands in one string. example
-//                 $sum 3 4 2
-//                 =>9
-                  if  (list_sequence_command.length > 1 && list_of_possible_command.indexOf(func_name)!= -1 ){
-                      var args = '';
-                      for ( var arg = 1; arg<list_sequence_command.length;arg++) {
-                          if (arg !=' '){
-                            args += list_sequence_command[arg]+'/';
-                          }
-                      }
-                      request.url = 'http://localhost:8000/' + func_name + '/'+args.slice(0, -1);
-//                      request.success = function(data){console.log(data)};
-                        $.ajax(request);
-                  }
             }
             command_manager(command_string);
             work_space.scrollTop(work_space[0].scrollHeight);
@@ -188,6 +134,3 @@ $(document).ready(function() {
     };
     document.getElementById("command_line").addEventListener("keypress", handler_area_writing, false);
 });
-
-
-
