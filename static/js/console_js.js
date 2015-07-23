@@ -2,6 +2,9 @@ $(document).ready(function() {
     var handler_area_writing,
         command_string,
         area_view,
+        sequence_command,
+        strings_from_server,
+        index_current_string,
         context,
         request,
         tim,
@@ -135,8 +138,8 @@ $(document).ready(function() {
                 history_list = JSON.parse($.jStorage.get('histor'));
                 history_list.push(command_string);
                 $.jStorage.set('histor', JSON.stringify(history_list));
-            initial_index = history_list.length;
-            current_index = initial_index;
+                initial_index = history_list.length;
+                current_index = initial_index;
             }
 
             request = {
@@ -151,14 +154,14 @@ $(document).ready(function() {
                     $('#area_view span:last').remove();
                      area_view.append('<span></span>');
                      $('#area_view span:last').addClass('in');
-                     var strings_from_server = data.parameter.split('\n');
-                    console.log(strings_from_server);
-                     var index_current_string = 0;
+                     strings_from_server = data.parameter.split('\n');
+                     index_current_string = 0;
                      function str_print(){
                          $("span[class='in']").typed({
                              strings: [strings_from_server[index_current_string]],
                              typeSpeed: -1000,
                              shuffle: false,
+                             contentType: 'string',
                              currentStringTyped: function () {
                                  work_space.scrollTop(work_space[0].scrollHeight);
                              },
@@ -184,7 +187,7 @@ $(document).ready(function() {
             };
 
             function command_manager(command_string) {
-                var sequence_command = command_string.replace(/ +/g, '/').trim();
+                sequence_command = command_string.replace(/ +/g, '/').trim();
                 request.url = 'http://localhost:8000/commands/' + sequence_command ;
                 area_view.append(_.template(template)({console_string : context}));
                 if(!command_string) return;

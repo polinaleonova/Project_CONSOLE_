@@ -12,3 +12,8 @@ There are also the short description and examples how using the command.
 The options history permit to you to use the previos commands - just press on 
 the keybord 'arrow up' or 'arrow down'. If you want to update you browser's 
 window, whatever history will be stored.
+
+Video Demo:
+<a href="https://youtu.be/3yEh6iWjqLQ" target="_blank">
+<img src="http://s2.postimg.org/7z4r3lf8p/demo.png" alt="Project Console" width="680" height="425" border="10" />
+</a>

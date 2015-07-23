@@ -143,18 +143,19 @@ def bracket_handler(list_with_numb_bracket):
 
             # result for first approach
             possible_combinations = get_all_correct_brack_combinations(number_bracket)
-            results = '=>Count of possible combinations = %s' % len(possible_combinations)
+            results = '=>Possible combinations: \n' + '\n'.join(possible_combinations) +  \
+                      '\nCount of possible combinations = %s' % len(possible_combinations)
             return results
 
 
 def help_handler(list_with_command):
     help_inf = {
             'help':'Command \"help\" for interactive help, or \"help command_name\"  for help about object.',
-            'sum': 'Command \"sum\" takes any non-negativ numbers of arguments and return '
+            'sum': 'Command \"sum\" takes any non-negativ numbers of arguments and returns '
                   'sum of all arguments.'
-                  ' Arguments must be integer type. Example : sum 3 100 20 =>123',
-            'bracket': ' Command \"bracket\" takes one argument N and return '
-                        'the number of all posible correct bracket expression,'
+                  ' Arguments must be integer type. \nExample : sum 3 100 20 =>123',
+            'bracket': ' Command \"bracket\" takes one argument N and returns '
+                        'the number of all possible correct bracket expression,'
                         ' which contains N opening and N closing brackets.'
                         'There are exemples of correct bracket expression:'
                         '\'()()()\'(N=3), \'((())()\'(N=4),\'()(()())\'(N=4).'
@@ -163,22 +164,22 @@ def help_handler(list_with_command):
                        ' N must be integer non-negative type.'
                        ' Example \' sum_factorial 3\' =>Count of possible combinations = 6',
             'anynumber': 'This command do not take any argumenst, '
-                         'it just return string with numbers 123456....'
-                         ' Example \' anynumber \' =>123456...' ,
-            'sum_factorial':' Command \"sum_factorial\" takes one integer number N > 1 '
-                            'and return the summary value of all digits in '
+                         'it just returns string with numbers 123456....'
+                         ' \nExample \' anynumber \' =>123456...' ,
+            'sum_factorial':' Command "sum_factorial" takes one integer number N > 1 '
+                            'and returns the summary value of all digits in '
                             'results of the calculation factorial N!(which equal N*(N-1)*(N-2)*..*2*1)'
-                            ' Example \' sum_factorial 3\' '
+                            ' \nExample \' sum_factorial 3\' '
                             '=>Sum of the digits in the factorial 3! is equal 6',
-            'find_max_palindrome': 'Command \"find_max_palindrome\" takes one '
-                        'argument N, and return the largest palindrome'
-                        ' made from the product of two N-digit numbers.'
+            'find_max_palindrome': 'Command "find_max_palindrome" takes one '
+                        'argument N, and returns the largest palindrome'
+                        ' made from the multiplication of two N-digit numbers.'
                          ' N must be integer type, non-negative and N<6, '
-                        'because time of calculation extremely rises. '
+                         'because time of calculation extremely rises.'
                          ' A palindromic number is number, which reading the same both ways.'
-                         ' Example of palindromic number:\'141141\',\'50205\'. '
-                         ' Example \' find_max_palindrome 2\' =>The largest palindrome, '
-                        'the product of two 2-digit numbers = 9009'
+                         ' \nExample of palindromic number:\'141141\',\'50205\'. '
+                         ' \nExample \' find_max_palindrome 2\' =>The largest palindrome, '
+                        'the multiplication of two 2-digit numbers = 9009'
                    }
     if len(list_with_command) == 0:
        list_all_commands = help_inf.keys()
