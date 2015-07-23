@@ -95,7 +95,7 @@ $(document).ready(function() {
     };
 
 //    Activation of the input string by the mouseclick on any place in the page
-    $("#work_space, body").on("click", function(){
+    $("#work_space, body").on("keypress", function(){
          $('#command_line').focus();
      });
 
@@ -149,16 +149,31 @@ $(document).ready(function() {
                 },
                 success: function (data) {
                     $('#area_view span:last').remove();
-                    area_view.append('<span></span>');
-                    $('#area_view span:last').addClass('in');
-                        $("span[class='in']").typed({
-                            strings:[data.parameter],
-                            typeSpeed: -1000,
-                            shuffle: false,
-                            currentStringTyped: function () {
-                                work_space.scrollTop(work_space[0].scrollHeight);
-                            }
-                        });
+                     area_view.append('<span></span>');
+                     $('#area_view span:last').addClass('in');
+                     var strings_from_server = data.parameter.split('\n');
+                    console.log(strings_from_server);
+                     var index_current_string = 0;
+                     function str_print(){
+                         $("span[class='in']").typed({
+                             strings: [strings_from_server[index_current_string]],
+                             typeSpeed: -1000,
+                             shuffle: false,
+                             currentStringTyped: function () {
+                                 work_space.scrollTop(work_space[0].scrollHeight);
+                             },
+                             onStringTyped: function() {
+                                 index_current_string++;
+                                 if(index_current_string !== strings_from_server.length){
+                                     area_view.append('<span></span>');
+                                     $('#area_view span:last').addClass('in');
+                                    str_print();
+                                 }
+                             }
+                         });
+                     }
+                     str_print();
+                     active_area.val('');
                 },
                 complete:function () {
                     $("#area_active").prop('hidden', false);
