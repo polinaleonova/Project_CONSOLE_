@@ -6,9 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="{% static 'css/console_style.css' %}" rel="stylesheet">
     <script src="{% static 'js/lib/jquery-1.11.3.js' %}"></script>
-    <script src="{% static 'js/console_js.js' %}"></script>
+    <script src="{% static 'js/lib/underscore.js' %}"></script>
     <script src="{% static 'js/lib/typed.js' %}"></script>
     <script src="{% static 'js/lib/underscore.js' %}"></script>
+    <script src="{% static 'js/lib/jstorage.js' %}"></script>
+    <script src="{% static 'js/console_js.js' %}"></script>
 
     {% autoescape off %}
         <script type="text/javascript">
@@ -22,6 +24,7 @@
 </head>
 
 <body>
+
 <div id="move_up" class="move_up_down"></div>
         <div class="console">
             <div id="work_space">

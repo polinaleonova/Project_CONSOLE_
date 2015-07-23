@@ -15,7 +15,8 @@ def commands(request, argument):
     list_arguments = argument.split('/')
     command = list_arguments[0]+'_handler'
     if not hasattr(handler, command):
-        return HttpResponse(json.dumps({'parameter': list_arguments[0] +': this command is not exist. If you want to know more about all building commands, use help <function_name>'}), mimetype='application/json')
+        argument_error = argument.replace('/',' ')
+        return HttpResponse(json.dumps({'parameter': argument_error +': this command is not exist. If you want to know more about all build-in commands, use help <function_name>'}), mimetype='application/json')
     else:
         data = getattr(handler, command)(list_arguments[1:])
         return HttpResponse(json.dumps({'parameter': data}), mimetype='application/json')

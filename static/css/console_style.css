@@ -6,7 +6,6 @@ body{
     background-image: url('/static/img/DSC1493.jpg');
     margin: 0;
     padding: 0;
-    /*background: honeydew;*/
     height: 100%;
     overflow-x: hidden;
 }
@@ -21,15 +20,18 @@ body{
     right: 0;
     left: 0;
     bottom: 0;
-    background : fixed, #304B54;
+    background : fixed, #010700;
     height: 400px;
-    border: #0F2106 solid 3px;
+    border: #010700 solid 1px;
     border-radius: 20px;
-    color: #F2EBD3;
-    box-shadow: 0 0 40px #131911;
+    color: #ECDBA2;
+    box-shadow: 0 0 50px #131911;
     outline: none;
 }
+
 #command_line{
+    margin-left: 4px;
+    /*padding: 0px;*/
     position: relative;
     float: left;
     word-break: break-all;
@@ -41,21 +43,20 @@ body{
     font-family: Arial;
     height: 20px;
     color: inherit;
-    background-color: #304B54;
+    background-color: inherit;
 }
-.active{
-     cursor: auto;
+/*.active{*/
+     /*cursor: auto;*/
 
-}
+/*}*/
 
 /*@keyframes blink {*/
- /*0% { color: #466157; }*/
- /*50% { color: #668C7E; }*/
- /*99% { color: #ACEAD2; }*/
+ /*0% { color: #010700; }*/
+ /*99% { color: #ECDBA2; }*/
 /*}*/
 
 /*.blink{*/
-    /*animation: blink 0.7s step-start infinite;*/
+    /*animation: blink 0.7s  infinite cubic-bezier(.65, 0.95, .03, 2.32);*/
 /*}*/
 
 #work_space{
@@ -72,32 +73,37 @@ body{
 }
 
 #area_active{
+    /*height: 20px;*/
     overflow-y: auto;
     top: 0;
     color: inherit;
     word-break: break-all;
     position: relative;
-    height: 40px;
-    background-color: #304B54;
+    background-color: inherit;
 }
 
 .initial_path{
-    height: 20px;
+    /*margin-right: 5px;*/
+    /*width: auto;*/
+    /*height: inherit;*/
     color: inherit;
+    width: 150px;
+    height: 20px;
     position: relative;
     float: left;
 }
 
 
 span{
+    word-break: break-all;
     display: block;
     position: relative;
     font-size: 16px !important;
     font-family: Arial;
 }
 .move_up_down{
-    opacity: 0.8;
-    z-index: 5;
+    opacity: 0.95;
+    z-index: 3;
     position: absolute;
     width: 30px;
     margin: auto;
@@ -105,13 +111,13 @@ span{
     left: 0;
     background : #F2EBD3;
     height: 30px;
-    border: #0F2106 solid 3px;
+    border: #1B221E solid 2px;
     border-radius: 30px;
     box-shadow: 0 0 40px #131911;
     font-size: 30px;
     display: flex;
     justify-content: space-around;
-    color: rgb(0, 119, 5)
+    color: #1B221E ;
 }
 #move_up{
     top: 0;
