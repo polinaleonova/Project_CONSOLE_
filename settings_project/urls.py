@@ -15,10 +15,14 @@ urlpatterns = patterns(
         'main.views.commands',
         name='comands'),
 
+url(r'^history/?(?P<argument>(.*))/?$',
+        'main.views.history',
+        name='history'),
 
-#     url(r'^anynumber/$',
-#         'main.views.anynumber',
-#         name='anynumber'),
+
+    # url(r'^anynumber/$',
+    #     'main.views.anynumber',
+    #     name='anynumber'),
 #
 #     url(r'^sum/(?P<optional>(.*))/?/$',
 #         'main.views.sum',

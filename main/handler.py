@@ -1,3 +1,16 @@
+from history.models import History
+
+
+def history_handler(list_of_args):
+    if len(list_of_args) > 0:
+        return '=>Command history do not take any arguments'
+    else:
+        h_list = History.objects.all()
+        h_str = ''
+        for i in range(len(h_list)-1):
+            h_str += str(h_list[i])+'\n'
+        return '=>Last commands:\n'+h_str
+
 
 def sum_handler(list_of_args):
     if len(list_of_args) == 0:
@@ -184,13 +197,13 @@ def help_handler(list_with_command):
     if len(list_with_command) == 0:
        list_all_commands = help_inf.keys()
        str_all_commands = "'\n'".join(list_all_commands)
-       return 'Command \"help\" for interactive help, or \"help command_name\"  for help about object. ' \
+       return '=>Command \"help\" for interactive help, or \"help command_name\"  for help about object. ' \
                'The list of all built-in commands:\n\'' + str_all_commands + "'"
     if len(list_with_command) == 1:
         search_command = list_with_command[0]
         return '=>'+help_inf[search_command]
     else:
-        return 'You must write only one command,' \
+        return '=>You must write only one command,' \
                ' Example \' help sum\' =>this command ..'
 
 
