@@ -30,7 +30,7 @@ function activation_scrolling(){
     if(work_space_scrollHeight - work_space_clientHeight > work_space_scrollTop
         && work_space_scrollHeight != 0 ){
         move_up.html('&#8607');
-          move_down.html('&#8609');
+        move_down.html('&#8609');
         return
 
     }

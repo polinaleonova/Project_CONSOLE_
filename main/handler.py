@@ -1,4 +1,4 @@
-from history.models import History
+from models_project.models import History
 
 
 def history_handler(list_of_args):

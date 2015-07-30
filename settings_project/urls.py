@@ -1,19 +1,21 @@
 from django.conf import settings
 from django.conf.urls import patterns, include, url
 from django.views.generic import TemplateView
-
+from django.contrib.flatpages import views
 
 # Uncomment the next two lines to enable the admin:
-# from django.contrib import admin
-# admin.autodiscover()
+from django.contrib import admin
+admin.autodiscover()
 
 
 urlpatterns = patterns(
     '',
+    url(r'^about/$', views.flatpage, {'url': '/about/'}, name='about'),
+    url(r'^admin/', include(admin.site.urls)),
 
     url(r'^commands/?(?P<argument>(.*))/?$',
         'main.views.commands',
-        name='comands'),
+        name='commands'),
 
 url(r'^history/?(?P<argument>(.*))/?$',
         'main.views.history',

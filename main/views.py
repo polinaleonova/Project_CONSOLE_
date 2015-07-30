@@ -7,7 +7,11 @@ from django.template import Context
 
 from django.http import HttpResponse
 from django.shortcuts import render, render_to_response
-from history.models import History
+from models_project.models import History
+
+
+def flatpage(request):
+    pass
 
 
 def history(request, argument):
@@ -15,7 +19,6 @@ def history(request, argument):
         arg = argument.replace('/', ' ')
         h = History(command_name=arg)
         h.save()
-    # h_list = History.objects.all()
     return HttpResponse()
 
 

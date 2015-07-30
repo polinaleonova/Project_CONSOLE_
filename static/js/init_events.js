@@ -5,7 +5,6 @@ $(document).ready(function() {
         tim;
 
     addOnWheel(work_space[0], function(e) {
-        activation_scrolling();
         var delta = e.deltaY || e.detail || e.wheelDelta;
         if (delta > 0){
             work_space.scrollTop(work_space.scrollTop() + 50);
@@ -13,6 +12,7 @@ $(document).ready(function() {
         else {
             work_space.scrollTop(work_space.scrollTop() - 50);
         }
+        activation_scrolling();
     });
 
 //    Handling of event mouseover to scrolling inner elements of the console by putting the button up and down
