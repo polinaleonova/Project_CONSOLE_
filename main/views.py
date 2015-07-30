@@ -8,10 +8,12 @@ from django.template import Context
 from django.http import HttpResponse
 from django.shortcuts import render, render_to_response
 from models_project.models import History
-
+from django.template import RequestContext, loader
 
 def flatpage(request):
-    pass
+    template = loader.get_template('templ/about.html')
+    context_dictionary = RequestContext(request,{})
+    return HttpResponse(template.render(context_dictionary))
 
 
 def history(request, argument):

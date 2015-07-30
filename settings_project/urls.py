@@ -10,8 +10,13 @@ admin.autodiscover()
 
 urlpatterns = patterns(
     '',
-    url(r'^about/$', views.flatpage, {'url': '/about/'}, name='about'),
+    # url(r'^about/$', views.flatpage, {'url': '/about/'}, name='about'),
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^about/?$',
+        'main.views.flatpage',
+        name='about'),
+
+
 
     url(r'^commands/?(?P<argument>(.*))/?$',
         'main.views.commands',
