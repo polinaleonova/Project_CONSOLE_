@@ -1,0 +1,14 @@
+{% extends 'console.html' %}
+{% block title%}{{ flatpage.title }}{% endblock %}
+{% block script %}
+    {% load static %}
+    <script src="{% static 'js/lib/jquery-1.11.3.js' %}"></script>
+    <script src="{% static 'js/lib/underscore.js' %}"></script>
+    <script src="{% static 'js/lib/typed.js' %}"></script>
+    <script src="{% static 'js/lib/underscore.js' %}"></script>
+    <script src="{% static 'js/lib/jstorage.js' %}"></script>
+    <script src="{% static 'js/init_event_topmenu.js' %}"></script>
+{% endblock %}
+{% block content %}{{ flatpage.content }}{% endblock %}
+
+

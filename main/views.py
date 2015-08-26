@@ -1,19 +1,11 @@
 import json
-import logging
-import random
 
-import handler
-from django.template import Context
+import handler, handler_databases
 
 from django.http import HttpResponse
 from django.shortcuts import render, render_to_response
-from models_project.models import History
+from models_project.models import History, Course , Person
 from django.template import RequestContext, loader
-
-def flatpage(request):
-    template = loader.get_template('templ/about.html')
-    context_dictionary = RequestContext(request,{})
-    return HttpResponse(template.render(context_dictionary))
 
 
 def history(request, argument):
@@ -35,6 +27,19 @@ def commands(request, argument):
     else:
         data = getattr(handler, command)(list_arguments[1:])
         return HttpResponse(json.dumps({'parameter': data}), mimetype='application/json')
+
+
+def information_about_courses_set(request):
+    template = loader.get_template('information_about_courses_set.html')
+    content_information_about_courses_set = handler_databases.handler_db_courses()
+
+    # content_information_about_courses_set = {'closed':'There are all courses, which you can to attend',
+    #                                          'opened':'There are courses, the set of which is closed ',
+    #                                          'closed_list':['Ja','Py_exp','Alg','JS_b'],
+    #                                          'opened_list':['Ja_m','Py_b','Py_m','JS_ex','HTML']}
+    context_dictionary = RequestContext(request, content_information_about_courses_set)
+    template.render(context_dictionary)
+    return HttpResponse(template.render(context_dictionary))
 
 
 def list_view(request, *args, **kwargs):
@@ -60,7 +65,3 @@ def list_view(request, *args, **kwargs):
 #     return HttpResponse(pipirka)
 
 
-# Project_CONSOLE_
-# It is the first project for implementation of the skills Python, Django, JavaScript, HTML and CSS.
-# This web-console must work like a unix-system console.
-# The execution of any command assume the calling of the view-function.

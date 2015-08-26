@@ -1,0 +1,28 @@
+{% extends 'console.html' %}
+{% block script %}
+    {% load static %}
+    <script src="{% static 'js/lib/jquery-1.11.3.js' %}"></script>
+    <script src="{% static 'js/lib/underscore.js' %}"></script>
+    <script src="{% static 'js/lib/typed.js' %}"></script>
+    <script src="{% static 'js/lib/underscore.js' %}"></script>
+    <script src="{% static 'js/lib/jstorage.js' %}"></script>
+    <script src="{% static 'js/init_event_topmenu.js' %}"></script>
+{% endblock %}
+{% block content %}
+    <div class="list">
+            <h3 style="top:100px;">{{ opened|default:"All courses are closed"}}</h3>
+            <ul>
+            {% for course in list_opened_set %}
+                <li>{{ course}}</li>
+            {% endfor %}
+            </ul>
+    </div>
+    <div class="list">
+    <h3>{{ closed|default:"All courses are opened"}}</h3>
+           <ul>
+            {% for course in list_closed_set  %}
+                <li>{{ course}}</li>
+            {% endfor %}
+            </ul>
+    </div>
+{% endblock %}

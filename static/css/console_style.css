@@ -2,12 +2,47 @@ html{
     height: 100%;
 }
 body{
+    overflow: hidden;
     background-size: cover;
     background-image: url('/static/img/DSC1493.jpg');
     margin: 0;
     padding: 0;
     height: 100%;
-    overflow-x: hidden;
+}
+
+.list{
+    color: #1B221E;
+    position: relative;
+    left: 40px;
+}
+
+
+.menu{
+    opacity: 0.3;
+    display: table;
+    z-index: 4;
+    position: relative;
+    top:0;
+    height: 80px;
+    width: 100%;
+    background : fixed, #1B221E;
+}
+
+.but{
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    position: relative;
+    margin:30px;
+    height: 20px;
+    width: 120px;
+    background : fixed, #1B221E;
+    color:#ECDBA2;
+    float:right;
+}
+
+.about{
+    position:relative;
 }
 
 .console {
@@ -31,7 +66,6 @@ body{
 
 #command_line{
     margin-left: 4px;
-    /*padding: 0px;*/
     position: relative;
     float: left;
     word-break: break-all;

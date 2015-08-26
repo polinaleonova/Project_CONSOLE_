@@ -1,7 +1,7 @@
 First pet project
 
 It is a little pet project which was created for systematization of skills and 
-knowlages in Python, Django, Javascript, JQuery, HTML, CSS and some plagins 
+knowledges in Python, Django, Javascript, JQuery, HTML, CSS and some plugins 
 and libraries (Typed.js, Underscore.js, Jstorage.js)
  
 It is the console for execution some built-in function. All that, you need it 

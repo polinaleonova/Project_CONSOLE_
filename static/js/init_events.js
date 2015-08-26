@@ -1,4 +1,5 @@
 $(document).ready(function() {
+
     var move_down = $("#move_down"),
         move_up = $("#move_up"),
         work_space = $("#work_space"),
@@ -36,5 +37,6 @@ $(document).ready(function() {
     $("#work_space, body").on("keypress", function(){
         $('#command_line').focus();
     });
+
 
 });

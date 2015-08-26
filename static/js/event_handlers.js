@@ -39,4 +39,6 @@ function activation_scrolling(){
         move_up.html('&#8607');
           move_down.html('');
     }
+
+
 }

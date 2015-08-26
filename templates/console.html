@@ -2,10 +2,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Web-console</title>
+    <title>{% block title%}Web-console{% endblock %}</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="{% static 'css/console_style.css' %}" rel="stylesheet">
+{% block script %}
     <script src="{% static 'js/lib/jquery-1.11.3.js' %}"></script>
     <script src="{% static 'js/lib/underscore.js' %}"></script>
     <script src="{% static 'js/lib/typed.js' %}"></script>
@@ -14,6 +15,8 @@
     <script src="{% static 'js/event_handlers.js' %}"></script>
     <script src="{% static 'js/init_events.js' %}"></script>
     <script src="{% static 'js/console_js.js' %}"></script>
+    <script src="{% static 'js/init_event_topmenu.js' %}"></script>
+{% endblock %}
 
     {% autoescape off %}
         <script type="text/javascript">
@@ -27,7 +30,12 @@
 </head>
 
 <body>
-
+<div class="menu">
+    <a class="but" href="/about/">About</a>
+    <a class="but center" href="/">Main</a>
+    <a class="but" href="/information_about_courses_set/">Information about courses</a>
+</div>
+{% block content %}
 <div id="move_up" class="move_up_down"></div>
         <div class="console">
             <div id="work_space">
@@ -43,6 +51,7 @@
             </div>
         </div>
 <div id="move_down" class="move_up_down"></div>
+{% endblock %}
 </body>
 
 </html>
